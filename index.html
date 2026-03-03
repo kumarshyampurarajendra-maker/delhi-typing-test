@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delhi Police Head Constable Typing Test</title>
+<style>
+body { font-family: Arial; padding: 20px; }
+textarea { width: 100%; height: 150px; }
+button { padding: 10px; margin-top: 10px; }
+#result { margin-top: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h2>Delhi Police Head Constable Ministerial Typing Test</h2>
+
+<label>Select Language:</label>
+<select id="language">
+<option value="english">English</option>
+<option value="hindi">Hindi</option>
+</select>
+
+<p id="passage">
+The quick brown fox jumps over the lazy dog. This is a sample typing passage for Delhi Police Head Constable Ministerial exam. Type this paragraph carefully without mistakes.
+</p>
+
+<textarea id="typedText" placeholder="Start typing here..."></textarea>
+<br>
+<button onclick="startTest()">Start Test</button>
+<button onclick="endTest()">Submit</button>
+
+<p id="timer">Time Left: 10:00</p>
+<div id="result"></div>
+
+<script>
+
+let time = 600;
+let timerInterval;
+
+function startTest(){
+    timerInterval = setInterval(function(){
+        time--;
+        let minutes = Math.floor(time/60);
+        let seconds = time % 60;
+        document.getElementById("timer").innerHTML = 
+        "Time Left: " + minutes + ":" + (seconds<10?"0"+seconds:seconds);
+        if(time <= 0){
+            clearInterval(timerInterval);
+            endTest();
+        }
+    },1000);
+}
+
+function calculateMarks(netWPM, lang){
+    if(lang=="english"){
+        if(netWPM < 30) return "Disqualified";
+        if(netWPM==30) return 10;
+        if(netWPM<=35) return 12;
+        if(netWPM<=40) return 15;
+        if(netWPM<=45) return 18;
+        if(netWPM<=50) return 21;
+        return 25;
+    } else {
+        if(netWPM < 25) return "Disqualified";
+        if(netWPM==25) return 10;
+        if(netWPM<=30) return 12;
+        if(netWPM<=35) return 15;
+        if(netWPM<=40) return 18;
+        if(netWPM<=45) return 21;
+        return 25;
+    }
+}
+
+function endTest(){
+    clearInterval(timerInterval);
+
+    let original = document.getElementById("passage").innerText.trim();
+    let typed = document.getElementById("typedText").value.trim();
+    let lang = document.getElementById("language").value;
+
+    let originalWords = original.split(" ");
+    let typedWords = typed.split(" ");
+
+    let mistakes = 0;
+    for(let i=0; i<originalWords.length; i++){
+        if(typedWords[i] != originalWords[i]){
+            mistakes++;
+        }
+    }
+
+    let totalTyped = typedWords.length;
+    let grossWPM = totalTyped / 10;
+    let netWPM = grossWPM - mistakes;
+
+    if(netWPM < 0) netWPM = 0;
+
+    let marks = calculateMarks(Math.floor(netWPM), lang);
+
+    document.getElementById("result").innerHTML =
+    "Gross WPM: " + grossWPM.toFixed(2) + "<br>" +
+    "Mistakes: " + mistakes + "<br>" +
+    "Net WPM: " + netWPM.toFixed(2) + "<br>" +
+    "Marks: " + marks;
+}
+
+</script>
+
+</body>
+  </html>
