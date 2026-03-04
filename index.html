@@ -47,8 +47,18 @@ Delhi Police Head Constable typing test is an important part of recruitment. Can
 <button onclick="startTest()">Start Test</button>
 <button onclick="endTest()">Submit</button>
 
-<p id="timer">Time Left: 10:00</p>
-<div id="result"></div>
+ <p id="timer">Time Left: 10:00</p>
+
+<div id="result" style="border:1px solid black; padding:15px; margin-top:20px; display:none;">
+<h3>Typing Test Result</h3>
+
+<p><b>Speed:</b> <span id="speed"></span> WPM</p>
+<p><b>Accuracy:</b> <span id="accuracy"></span>%</p>
+<p><b>Mistakes:</b> <span id="mistakes"></span></p>
+
+<h4>Your Typed Text:</h4>
+<div id="typedPreview" style="background:#f2f2f2; padding:10px; max-height:150px; overflow-y:auto;"></div>
+</div>   
 
 <audio id="typeSound">
 <source src="https://www.soundjay.com/button/sounds/button-16.mp3" type="audio/mpeg">
