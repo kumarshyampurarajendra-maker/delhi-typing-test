@@ -80,32 +80,44 @@ function startTest(){
         },1000);
     }
 }
-
 function endTest(){
     clearInterval(timerInterval);
 
-    let original = document.getElementById("text").innerText.trim().split(" ");
-    let typed = document.getElementById("input").value.trim().split(" ");
+    let originalText = document.getElementById("text").innerText.trim();
+    let typedText = document.getElementById("input").value.trim();
 
-    let mistakes = 0;
+    let originalWords = originalText.split(" ");
+    let typedWords = typedText.split(" ");
+
     let correct = 0;
+    let mistakes = 0;
 
-    for(let i=0; i<original.length; i++){
-        if(typed[i] == original[i]) correct++;
-        else mistakes++;
+    for(let i=0; i<typedWords.length; i++){
+        if(typedWords[i] === originalWords[i]){
+            correct++;
+        } else {
+            mistakes++;
+        }
     }
 
-    let totalTyped = typed.length;
-    let grossWPM = totalTyped / 10;
-    let netWPM = grossWPM - mistakes;
+    let totalTyped = typedWords.length;
+    let accuracy = ((correct / totalTyped) * 100) || 0;
+
+    let minutes = (600 - time) / 60;
+    let grossWPM = totalTyped / minutes;
+    let netWPM = grossWPM - (mistakes / minutes);
 
     if(netWPM < 0) netWPM = 0;
 
     document.getElementById("result").innerHTML =
-    "Gross WPM: " + grossWPM.toFixed(2) + "<br>" +
-    "Mistakes: " + mistakes + "<br>" +
-    "Net WPM: " + netWPM.toFixed(2);
-}
+        "Total Typed Words: " + totalTyped + "<br>" +
+        "Correct Words: " + correct + "<br>" +
+        "Mistakes: " + mistakes + "<br>" +
+        "Accuracy: " + accuracy.toFixed(2) + "%<br>" +
+        "Gross WPM: " + grossWPM.toFixed(2) + "<br>" +
+        "Net WPM: " + netWPM.toFixed(2);
+    }
+
 </script>
 
 </body>
