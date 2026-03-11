@@ -121,13 +121,12 @@ function endTest(){
 
     if(netWPM < 0) netWPM = 0;
 
-    document.getElementById("result").innerHTML =
-        "Total Typed Words: " + totalTyped + "<br>" +
-        "Correct Words: " + correct + "<br>" +
-        "Mistakes: " + mistakes + "<br>" +
-        "Accuracy: " + accuracy.toFixed(2) + "%<br>" +
-        "Gross WPM: " + grossWPM.toFixed(2) + "<br>" +
-        "Net WPM: " + netWPM.toFixed(2);
+    document.getElementById("result").style.display = "block";
+
+document.getElementById("speed").innerText = netWPM.toFixed(2);
+document.getElementById("accuracy").innerText = accuracy.toFixed(2);
+document.getElementById("mistakes").innerText = mistakes;
+document.getElementById("typedPreview").innerText = typedText;
     }
 
 </script>
