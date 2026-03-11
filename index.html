@@ -68,6 +68,19 @@ Delhi Police Head Constable typing test is an important part of recruitment. Can
 </audio>
 
 <script>
+    let tests = [
+
+"Delhi Police Head Constable typing test is an important part of recruitment. Candidates must type the given passage within ten minutes with good speed and accuracy.",
+
+"Typing is a valuable skill in government jobs. Candidates preparing for Delhi Police typing test should practice daily.",
+
+"Regular typing practice increases confidence and performance. Students should focus on correct words instead of rushing.",
+
+"Computer typing skill is essential for ministerial posts. Candidates should maintain proper finger position.",
+
+"Typing tests measure how quickly and accurately a person can type a passage."
+
+];
 let time = 600;
 let timerInterval;
 let started = false;
@@ -77,6 +90,8 @@ function playSound(){
 }
 
 function startTest(){
+    let randomTest = tests[Math.floor(Math.random() * tests.length)];
+document.getElementById("text").innerText = randomTest;
     if(!started){
         started = true;
         timerInterval = setInterval(function(){
