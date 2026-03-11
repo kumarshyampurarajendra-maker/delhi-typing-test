@@ -39,7 +39,13 @@ button {
 <body>
 
 <h2>Delhi Police Head Constable Typing Test (Practice)</h2>
-
+<select id="testSelect">
+<option value="0">Test 1</option>
+<option value="1">Test 2</option>
+<option value="2">Test 3</option>
+<option value="3">Test 4</option>
+<option value="4">Test 5</option>
+</select>
 <div id="text">
 Delhi Police Head Constable typing test is an important part of recruitment. Candidates must type the given passage within ten minutes with good speed and accuracy. The typing test evaluates both speed and error rate. Minimum required speed is thirty words per minute for English typing. Accuracy is equally important because mistakes reduce scoring. Even if speed is good, too many errors can lower results. Regular practice helps in improvement. Candidates should practice daily to build consistency. Typing is a skill that improves with time and effort. Do not rush while typing; focus on correct words. Speed will automatically increase with practice. Delhi Police recruitment process requires candidates to meet specific standards. Head Constable job involves computer-based work, so typing skill is essential. A good typist can complete tasks quickly and efficiently. The typing test duration is ten minutes. During this time candidates must type the given passage. Avoid unnecessary mistakes and maintain proper speed. Accuracy matters more than rushing. Typing test results contribute to overall selection. Good performance increases chances of success. Candidates should prepare well before the exam. Practice with long passages to improve stamina. Typing for ten minutes continuously requires focus. Do not stop while typing unless necessary. Keep hands in proper position for better speed. With regular effort typing skills improve significantly. Head Constable recruitment is competitive, so preparation is important. Students should use practice platforms to enhance skills. Typing tests are designed to evaluate real-world computer work ability. Good typing speed helps in official work after selection. Delhi Police offers career opportunities for deserving candidates. Stay consistent and practice daily for better results. Recruitment process ensures selection of skilled candidates. Typing test is not difficult if practiced regularly. Candidates should focus on both speed and accuracy. Mistakes can reduce marks, so careful typing is necessary. Ten minutes is sufficient time for 700 words if speed is good. Practice improves confidence and performance. Always review typed text before submission. Delhi Police Head Constable position requires discipline and skill. Candidates must prepare with dedication. Success in typing test increases chances of selection. Regular typing practice helps in achieving required speed. Accuracy should not be ignored. Good typing skill is useful in government jobs. Candidates should avoid typing errors. Speed and accuracy both matter in evaluation. With dedication, typing test can be cleared easily. Typing test is designed to assess computer typing capability. Government jobs require basic computer skills. Head Constable ministerial work involves documentation. Typing skill helps in office tasks. Practice daily to improve performance.
 </div>
@@ -70,6 +76,19 @@ Delhi Police Head Constable typing test is an important part of recruitment. Can
 <script>
     let tests = [
 
+"Typing is an important computer skill required in many government jobs.",
+
+"Computer typing speed improves with regular practice and dedication.",
+
+"Typing tests measure how quickly and accurately a person can type.",
+
+"Delhi Police Head Constable ministerial post requires good typing skill.",
+
+"Accuracy is very important in typing tests because mistakes reduce marks."
+
+];
+    let tests = [
+
 "Delhi Police Head Constable typing test is an important part of recruitment. Candidates must type the given passage within ten minutes with good speed and accuracy.",
 
 "Typing is a valuable skill in government jobs. Candidates preparing for Delhi Police typing test should practice daily.",
@@ -90,6 +109,8 @@ function playSound(){
 }
 
 function startTest(){
+    let selectedTest = document.getElementById("testSelect").value;
+document.getElementById("text").innerText = tests[selectedTest];
     let randomTest = tests[Math.floor(Math.random() * tests.length)];
 document.getElementById("text").innerText = randomTest;
     if(!started){
