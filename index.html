@@ -7,11 +7,8 @@
 body{
     font-family: Arial;
     text-align:center;
-    margin:0;
-    padding:0;
 }
 
-/* 🔥 TIMER RIGHT SIDE */
 #timer{
     position:fixed;
     right:20px;
@@ -20,33 +17,30 @@ body{
     font-weight:bold;
 }
 
-/* 🔥 PASSAGE BOX (SCROLL ENABLED) */
 #text{
     border:1px solid black;
     padding:15px;
-    height:300px;        /* 👈 छोटा box */
+    height:300px;
     width:80%;
     margin:60px auto 10px;
-    overflow-y:auto;     /* 👈 SCROLL */
+    overflow-y:auto;
     text-align:left;
-    font-size:20px;
-    line-height:30px;
+    font-size:18px;
+    line-height:28px;
 }
 
-/* 🔥 TYPING BOX */
 textarea{
     width:80%;
     height:150px;
     font-size:18px;
 }
 
-/* 🔥 BUTTON */
 button{
     padding:10px 20px;
     margin:10px;
 }
-
 </style>
+
 </head>
 
 <body>
@@ -67,11 +61,16 @@ button{
 
 <script>
 
-// 🔥 100 DIFFERENT PASSAGES
+// 🔥 100 DIFFERENT PASSAGES (AUTO UNIQUE)
 let tests = [];
 
 for(let i=1;i<=100;i++){
-    tests.push("Passage "+i+": Delhi Police typing test requires candidates to type accurately and efficiently. Regular practice improves speed and reduces mistakes. Candidates must focus on correct words and avoid unnecessary errors while typing. Government jobs require discipline and consistency in work performance.");
+    tests.push(
+    "Passage "+i+": Delhi Police typing test is designed to evaluate typing speed and accuracy of candidates. "+
+    "Candidates must type carefully without making mistakes. Regular practice helps in improving performance. "+
+    "Typing skill is essential for government jobs and office work. Candidates should maintain focus and avoid errors while typing. "+
+    "Accuracy plays an important role because mistakes reduce final speed and score. Practice daily for best results."
+    );
 }
 
 let time = 600;
@@ -85,9 +84,9 @@ function startTest(){
 
     let baseText = tests[index];
 
-    // 🔥 LONG PASSAGE (SCROLL आएगा)
+    // बड़ा passage (scroll आएगा)
     let longText = "";
-    for(let i=0;i<25;i++){
+    for(let i=0;i<8;i++){
         longText += baseText + " ";
     }
 
@@ -128,14 +127,25 @@ function endTest(){
 
     let correct = 0;
     let mistakes = 0;
+    let miniMistakes = 0;
 
     let maxLength = Math.max(original.length, typed.length);
 
     for(let i=0;i<maxLength;i++){
+
         if(typed[i] === original[i]){
             correct++;
-        }else{
+        }
+        else{
             mistakes++;
+
+            // 🔥 MINI MISTAKE (spelling close check)
+            if(typed[i] && original[i]){
+                let diff = Math.abs(typed[i].length - original[i].length);
+                if(diff <= 2){
+                    miniMistakes++;
+                }
+            }
         }
     }
 
@@ -145,23 +155,25 @@ function endTest(){
 
     let gross = attempted / minutes;
 
-    // 🔥 DELHI POLICE PATTERN
+    // 🔥 DELHI POLICE LOGIC
     let net = gross - mistakes;
-    if(net<0) net=0;
+
+    if(net < 0) net = 0;
 
     let accuracy = (correct/attempted)*100 || 0;
 
     document.getElementById("result").innerHTML = `
-    Attempted: ${attempted} <br>
+    Attempted Words: ${attempted} <br>
     Gross Speed: ${gross.toFixed(2)} WPM <br>
     Net Speed: ${net.toFixed(2)} WPM <br>
     Accuracy: ${accuracy.toFixed(2)}% <br>
-    Mistakes: ${mistakes} <br>
-    Result: ${net >= 35 ? "Qualified" : "Not Qualified"}
+    Total Mistakes: ${mistakes} <br>
+    Mini Mistakes: ${miniMistakes} <br>
+    Result: ${net >= 30 ? "Qualified" : "Not Qualified"}
     `;
 }
 
 </script>
 
 </body>
-    </html>
+</html>
