@@ -1,4 +1,170 @@
-let original = currentText.trim().split(/\s+/);
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delhi Police Typing Test</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+}
+
+#timer{
+    position:fixed;
+    right:20px;
+    top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+#text{
+    border:1px solid black;
+    padding:20px;
+    height:320px;
+    width:85%;
+    margin:60px auto 10px;
+    overflow-y:auto;
+    text-align:left;
+    font-size:18px;
+    line-height:30px;
+}
+
+textarea{
+    width:85%;
+    height:150px;
+    font-size:18px;
+}
+
+select,button{
+    padding:10px;
+    margin:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Delhi Police Head Constable Typing Test</h2>
+
+<p id="timer">Time Left: 10:00</p>
+
+<select id="testSelect"></select>
+
+<div id="text">Select Test & Click Start</div>
+
+<textarea id="input" placeholder="Start typing here..."></textarea>
+
+<br>
+<button onclick="startTest()">Start</button>
+<button onclick="endTest()">Submit</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+// 🔥 FULL MULTILINE PASSAGES
+let tests = [
+
+`Environment protection is one of the most important responsibilities of modern society.
+The balance of nature is essential for the survival of all living beings on earth.
+Rapid industrialization and urbanization have caused serious damage to natural resources.
+Forests are being cut down, rivers are polluted, and air quality is getting worse.
+These environmental issues affect both wildlife and human health.
+
+Governments are taking steps to reduce pollution and promote sustainable development.
+Laws have been introduced to control emissions and protect forests.
+However, individuals also play a major role.
+Saving water, reducing plastic, and planting trees can help significantly.
+
+Education spreads awareness about environment protection.
+Schools should encourage students to participate in activities like tree plantation.
+Renewable energy like solar and wind power is also important for a cleaner future.
+
+In conclusion, protecting the environment is everyone's responsibility.
+Without proper care, natural resources may get exhausted, leading to serious problems.`,
+
+`Air pollution is one of the biggest challenges faced by modern cities.
+It is mainly caused by vehicle emissions, industrial smoke, and burning of fossil fuels.
+Increasing population leads to more vehicles on roads, which increases harmful gases in the air.
+This causes serious health issues such as asthma and lung diseases.
+
+Governments have created rules to control pollution, but public support is necessary.
+People should use public transport and avoid unnecessary vehicle use.
+Industries must adopt cleaner technologies to reduce emissions.
+
+Planting trees helps improve air quality because trees absorb carbon dioxide.
+Awareness programs are important to educate people about pollution.
+
+In conclusion, air pollution is a serious problem that needs immediate attention.
+Everyone must work together for a healthy future.`,
+
+`Population growth is a major concern for developing countries.
+As the population increases, demand for food, water, and jobs also rises.
+This creates pressure on natural resources and leads to environmental problems.
+
+Governments are trying to control population through awareness programs.
+Education plays an important role in population control.
+
+Cities face problems like traffic, pollution, and lack of facilities.
+Proper planning is required to manage these issues.
+
+In conclusion, population control is necessary for sustainable development.
+Balanced growth is important for a better future.`
+
+];
+
+// dropdown
+let select = document.getElementById("testSelect");
+tests.forEach((_,i)=>{
+    let opt = document.createElement("option");
+    opt.value = i;
+    opt.text = "Test " + (i+1);
+    select.appendChild(opt);
+});
+
+let time = 600;
+let timer;
+let currentText = "";
+
+// START
+function startTest(){
+
+    let index = document.getElementById("testSelect").value;
+
+    currentText = tests[index];
+
+    // 🔥 IMPORTANT FIX
+    document.getElementById("text").innerHTML = currentText.replace(/\n/g,"<br>");
+
+    document.getElementById("input").value = "";
+
+    time = 600;
+
+    clearInterval(timer);
+
+    timer = setInterval(()=>{
+        time--;
+
+        let m = Math.floor(time/60);
+        let s = time%60;
+
+        document.getElementById("timer").innerText =
+        "Time Left: "+m+":"+(s<10?"0"+s:s);
+
+        if(time<=0){
+            clearInterval(timer);
+            endTest();
+        }
+
+    },1000);
+}
+
+// RESULT
+function endTest(){
+
+    clearInterval(timer);
+
+    let original = currentText.trim().split(/\s+/);
     let typed = document.getElementById("input").value.trim().split(/\s+/);
 
     let correct = 0;
@@ -37,4 +203,3 @@ let original = currentText.trim().split(/\s+/);
 
 </body>
     </html>
-        
