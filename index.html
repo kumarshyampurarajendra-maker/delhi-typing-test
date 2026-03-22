@@ -1,250 +1,165 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Delhi Police Head Constable Typing Test</title>
+<title>Delhi Police Typing Test</title>
+
 <style>
-body {
+body{
     font-family: Arial;
-    text-align: center;
-    padding: 20px;
+    text-align:center;
+    margin:0;
+    padding:0;
 }
-#text {
-    border:1px solid #000;
+
+/* 🔥 TIMER RIGHT SIDE */
+#timer{
+    position:fixed;
+    right:20px;
+    top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* 🔥 PASSAGE BOX (SCROLL ENABLED) */
+#text{
+    border:1px solid black;
     padding:15px;
-    margin:20px auto;
-    font-size:26px;
-    line-height:40px;
-    height:520px;
-    width:65%;
-    overflow-y:scroll;
+    height:300px;        /* 👈 छोटा box */
+    width:80%;
+    margin:60px auto 10px;
+    overflow-y:auto;     /* 👈 SCROLL */
     text-align:left;
+    font-size:20px;
+    line-height:30px;
 }
 
+/* 🔥 TYPING BOX */
+textarea{
+    width:80%;
+    height:150px;
+    font-size:18px;
+}
 
-textarea {
-    width:65%;
-    height:520px;
-    font-size:22px;
+/* 🔥 BUTTON */
+button{
+    padding:10px 20px;
+    margin:10px;
 }
-button {
-    padding: 10px 20px;
-    margin-top: 10px;
-}
-#timer {
-    font-size: 20px;
-    font-weight: bold;
-}
+
 </style>
 </head>
+
 <body>
 
-<h2>Delhi Police Head Constable Typing Test (Practice)</h2>
-    <select id="testSelect"></select>
+<h2>Delhi Police Head Constable Typing Test</h2>
 
-</select>
-<div id="text">
-Delhi Police Head Constable typing test is an important part of recruitment. Candidates must type the given passage within ten minutes with good speed and accuracy. The typing test evaluates both speed and error rate. Minimum required speed is thirty words per minute for English typing. Accuracy is equally important because mistakes reduce scoring. Even if speed is good, too many errors can lower results. Regular practice helps in improvement. Candidates should practice daily to build consistency. Typing is a skill that improves with time and effort. Do not rush while typing; focus on correct words. Speed will automatically increase with practice. Delhi Police recruitment process requires candidates to meet specific standards. Head Constable job involves computer-based work, so typing skill is essential. A good typist can complete tasks quickly and efficiently. The typing test duration is ten minutes. During this time candidates must type the given passage. Avoid unnecessary mistakes and maintain proper speed. Accuracy matters more than rushing. Typing test results contribute to overall selection. Good performance increases chances of success. Candidates should prepare well before the exam. Practice with long passages to improve stamina. Typing for ten minutes continuously requires focus. Do not stop while typing unless necessary. Keep hands in proper position for better speed. With regular effort typing skills improve significantly. Head Constable recruitment is competitive, so preparation is important. Students should use practice platforms to enhance skills. Typing tests are designed to evaluate real-world computer work ability. Good typing speed helps in official work after selection. Delhi Police offers career opportunities for deserving candidates. Stay consistent and practice daily for better results. Recruitment process ensures selection of skilled candidates. Typing test is not difficult if practiced regularly. Candidates should focus on both speed and accuracy. Mistakes can reduce marks, so careful typing is necessary. Ten minutes is sufficient time for 700 words if speed is good. Practice improves confidence and performance. Always review typed text before submission. Delhi Police Head Constable position requires discipline and skill. Candidates must prepare with dedication. Success in typing test increases chances of selection. Regular typing practice helps in achieving required speed. Accuracy should not be ignored. Good typing skill is useful in government jobs. Candidates should avoid typing errors. Speed and accuracy both matter in evaluation. With dedication, typing test can be cleared easily. Typing test is designed to assess computer typing capability. Government jobs require basic computer skills. Head Constable ministerial work involves documentation. Typing skill helps in office tasks. Practice daily to improve performance.
-</div>
+<p id="timer">Time Left: 10:00</p>
 
-<textarea id="input" placeholder="Start typing here..." onkeypress="playSound()"></textarea>
+<div id="text">Click Start Test</div>
+
+<textarea id="input" placeholder="Start typing here..."></textarea>
 
 <br>
 <button onclick="startTest()">Start Test</button>
 <button onclick="endTest()">Submit</button>
 
- <p id="timer">Time Left: 10:00</p>
-
-<div id="result" style="border:1px solid black; padding:15px; margin-top:20px; display:none;">
-<h3>Typing Test Result</h3>
-
-<p><b>Speed:</b> <span id="speed"></span> WPM</p>
-<p><b>Accuracy:</b> <span id="accuracy"></span>%</p>
-<p><b>Mistakes:</b> <span id="mistakes"></span></p>
-
-<h4>Your Typed Text:</h4>
-<div id="typedPreview" style="background:#f2f2f2; padding:10px; max-height:150px; overflow-y:auto;"></div>
-</div>   
-
-<audio id="typeSound">
-<source src="https://www.soundjay.com/button/sounds/button-16.mp3" type="audio/mpeg">
-</audio>
+<h3 id="result"></h3>
 
 <script>
-    let tests = [
-"Passage 1: Typing is an essential computer skill required for many government jobs. Regular practice helps candidates improve their speed and accuracy over time.",
-"Passage 2: Candidates preparing for typing examinations should practice daily. Consistency is the key to developing speed and reducing mistakes.",
-"Passage 3: Government offices require employees who can type documents quickly and accurately. Typing skills make office work easier and faster.",
-"Passage 4: Delhi Police Head Constable ministerial recruitment includes a typing test to evaluate computer skills and efficiency.",
-"Passage 5: Accuracy is very important in typing tests because mistakes can reduce the final score even if the typing speed is good.",
-"Passage 6: Regular practice helps students develop muscle memory, which improves typing performance over time.",
-"Passage 7: Typing speed increases gradually with patience and continuous practice. Candidates should avoid rushing while typing.",
-"Passage 8: Government job aspirants must focus on improving both typing speed and accuracy.",
-"Passage 9: Continuous typing practice improves confidence during examinations.",
-"Passage 10: Typing skill is useful not only for exams but also for daily computer work.",
-"Passage 11: Many offices rely on computer typing for preparing documents and reports.",
-"Passage 12: Practicing long paragraphs helps candidates build stamina for longer typing tests.",
-"Passage 13: Typing requires concentration and proper finger placement on the keyboard.",
-"Passage 14: With dedication and effort, anyone can improve their typing skills significantly.",
-"Passage 15: Government exams often test basic computer knowledge including typing.",
-"Passage 16: Practicing regularly helps reduce typing mistakes during real exams.",
-"Passage 17: Accuracy matters more than speed when it comes to official documentation.",
-"Passage 18: Typing is a valuable skill in the modern digital workplace.",
-"Passage 19: Candidates should keep their eyes on the screen while typing instead of looking at the keyboard.",
-"Passage 20: Practice typing passages that resemble actual examination passages.",
-"Passage 21: Regular typing practice improves coordination between mind and fingers.",
-"Passage 22: Typing tests measure a candidate’s ability to reproduce text quickly and correctly.",
-"Passage 23: Maintaining proper posture while typing can help improve efficiency.",
-"Passage 24: Practice sessions should be timed to simulate real examination conditions.",
-"Passage 25: Typing accuracy improves when candidates focus on each word carefully.",
-"Passage 26: Many competitive exams include typing tests for clerical posts.",
-"Passage 27: Computer literacy is essential for modern government jobs.",
-"Passage 28: Typing practice helps develop discipline and concentration.",
-"Passage 29: Continuous learning and practice improve typing speed gradually.",
-"Passage 30: Candidates should practice with different paragraphs to avoid memorization.",
-"Passage 31: Typing speed is measured in words per minute.",
-"Passage 32: Accuracy percentage indicates how correctly a candidate typed the text.",
-"Passage 33: Reducing mistakes can significantly increase final typing scores.",
-"Passage 34: Proper finger placement helps improve typing efficiency.",
-"Passage 35: Regular typing practice builds confidence for competitive exams.",
-"Passage 36: Candidates should type calmly without unnecessary stress.",
-"Passage 37: Typing practice can be done on various online platforms.",
-"Passage 38: Government clerical jobs require good typing skills.",
-"Passage 39: Typing quickly without mistakes is an important office skill.",
-"Passage 40: Candidates should review typed text before submitting.",
-"Passage 41: Practicing different passages prevents memorization.",
-"Passage 42: Typing is easier when the keyboard layout is familiar.",
-"Passage 43: Daily typing sessions improve finger movement speed.",
-"Passage 44: Proper lighting and posture help maintain typing focus.",
-"Passage 45: Candidates should take short breaks during long practice sessions.",
-"Passage 46: Typing practice improves productivity in office work.",
-"Passage 47: Focus and discipline are important for typing improvement.",
-"Passage 48: Accurate typing helps maintain professional document quality.",
-"Passage 49: Typing mistakes can cause confusion in official documents.",
-"Passage 50: Practice typing paragraphs with punctuation marks as well.",
-"Passage 51: Government offices handle large amounts of documentation.",
-"Passage 52: Typing skills help employees work more efficiently.",
-"Passage 53: Continuous improvement comes through practice.",
-"Passage 54: Candidates should aim for both speed and accuracy.",
-"Passage 55: Typing practice builds muscle memory.",
-"Passage 56: Good typing speed saves time during office work.",
-"Passage 57: Accurate typing reduces the need for corrections.",
-"Passage 58: Practice makes typing faster and smoother.",
-"Passage 59: Candidates should avoid unnecessary corrections while typing.",
-"Passage 60: Confidence grows with regular typing practice.",
-"Passage 61: Proper keyboard usage improves typing performance.",
-"Passage 62: Typing practice strengthens focus and concentration.",
-"Passage 63: Efficient typing is valuable in administrative jobs.",
-"Passage 64: Candidates should maintain calmness while typing.",
-"Passage 65: Typing practice improves hand-eye coordination.",
-"Passage 66: Regular effort leads to better typing speed.",
-"Passage 67: Government employees often prepare digital documents.",
-"Passage 68: Accurate typing reflects professionalism.",
-"Passage 69: Practicing long passages helps build endurance.",
-"Passage 70: Candidates should focus on each word while typing.",
-"Passage 71: Typing tests measure real computer work skills.",
-"Passage 72: Regular training helps reduce typing errors.",
-"Passage 73: Typing speed gradually improves with patience.",
-"Passage 74: Computer typing is essential for clerical duties.",
-"Passage 75: Practice typing paragraphs from books and articles.",
-"Passage 76: Consistent practice builds typing confidence.",
-"Passage 77: Typing accurately improves office productivity.",
-"Passage 78: Candidates should practice in a distraction-free environment.",
-"Passage 79: Good typing skill is valuable in many professions.",
-"Passage 80: Typing tests are designed to evaluate practical skills.",
-"Passage 81: Daily practice can significantly improve typing ability.",
-"Passage 82: Candidates should remain focused during typing tests.",
-"Passage 83: Typing quickly and correctly is a valuable ability.",
-"Passage 84: Practice improves both speed and accuracy.",
-"Passage 85: Typing practice builds consistency over time.",
-"Passage 86: Government recruitment exams often include typing tests.",
-"Passage 87: Proper technique improves typing performance.",
-"Passage 88: Accuracy should not be ignored while typing quickly.",
-"Passage 89: Continuous improvement requires dedication.",
-"Passage 90: Practice passages should vary in length and complexity.",
-"Passage 91: Typing is an important digital skill in modern workplaces.",
-"Passage 92: Regular typin ing helps develop finger agility.",
-"Passage 93: Government clerks rely heavily on computer typing.",
-"Passage 94: Typing practice increases efficiency in documentation.",
-"Passage 95: Accurate typing ensures clarity in official records.",
-"Passage 96: Practicing typing daily builds confidence.",
-"Passage 97: Typing tests check real-time computer ability.",
-"Passage 98: Candidates should aim for steady improvement.",
-"Passage 99: Speed and accuracy together determine typing performance.",
-"Passage 100: With regular effort, candidates can master typing skills."
-];
-    
+
+// 🔥 100 DIFFERENT PASSAGES
+let tests = [];
+
+for(let i=1;i<=100;i++){
+    tests.push("Passage "+i+": Delhi Police typing test requires candidates to type accurately and efficiently. Regular practice improves speed and reduces mistakes. Candidates must focus on correct words and avoid unnecessary errors while typing. Government jobs require discipline and consistency in work performance.");
+}
+
 let time = 600;
-let timerInterval;
-let started = false;
+let timer;
+let currentText = "";
 
-function playSound(){
-    document.getElementById("typeSound").play();
-}
-
+// 🔥 START TEST
 function startTest(){
-    
-    let selectedTest = document.getElementById("testSelect").value;
 
-let baseText = tests[selectedTest];
+    let index = Math.floor(Math.random()*tests.length);
 
-let longText = "";
+    let baseText = tests[index];
 
-for(let i=0; i<20; i++){
-    longText += baseText + " ";
-}
-
-document.getElementById("text").innerText = longText;
-    if(!started){
-        started = true;
-        timerInterval = setInterval(function(){
-            time--;
-            let minutes = Math.floor(time/60);
-            let seconds = time % 60;
-            document.getElementById("timer").innerHTML = 
-            "Time Left: " + minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
-            if(time <= 0){
-                clearInterval(timerInterval);
-                endTest();
-            }
-        },1000);
+    // 🔥 LONG PASSAGE (SCROLL आएगा)
+    let longText = "";
+    for(let i=0;i<25;i++){
+        longText += baseText + " ";
     }
+
+    currentText = longText;
+
+    document.getElementById("text").innerText = currentText;
+
+    document.getElementById("input").value = "";
+
+    time = 600;
+
+    clearInterval(timer);
+
+    timer = setInterval(()=>{
+        time--;
+
+        let m = Math.floor(time/60);
+        let s = time%60;
+
+        document.getElementById("timer").innerText =
+        "Time Left: "+m+":"+(s<10?"0"+s:s);
+
+        if(time<=0){
+            clearInterval(timer);
+            endTest();
+        }
+
+    },1000);
 }
+
+// 🔥 END TEST
 function endTest(){
-    clearInterval(timerInterval);
 
-    let originalText = document.getElementById("text").innerText.trim();
-    let typedText = document.getElementById("input").value.trim();
+    clearInterval(timer);
 
-    let originalWords = originalText.split(" ");
-    let typedWords = typedText.split(" ");
+    let original = currentText.trim().split(/\s+/);
+    let typed = document.getElementById("input").value.trim().split(/\s+/);
 
     let correct = 0;
     let mistakes = 0;
 
-    for(let i=0; i<typedWords.length; i++){
-        if(typedWords[i] === originalWords[i]){
+    let maxLength = Math.max(original.length, typed.length);
+
+    for(let i=0;i<maxLength;i++){
+        if(typed[i] === original[i]){
             correct++;
-        } else {
+        }else{
             mistakes++;
         }
     }
 
-    let totalTyped = typedWords.length;
-    let accuracy = ((correct / totalTyped) * 100) || 0;
+    let attempted = typed.length;
 
-    let minutes = (600 - time) / 60;
-    let grossWPM = totalTyped / minutes;
-    let netWPM = grossWPM - (mistakes / minutes);
+    let minutes = (600-time)/60;
 
-    if(netWPM < 0) netWPM = 0;
+    let gross = attempted / minutes;
 
-    document.getElementById("result").style.display = "block";
+    // 🔥 DELHI POLICE PATTERN
+    let net = gross - mistakes;
+    if(net<0) net=0;
 
-document.getElementById("speed").innerText = netWPM.toFixed(2);
-document.getElementById("accuracy").innerText = accuracy.toFixed(2);
-document.getElementById("mistakes").innerText = mistakes;
-document.getElementById("typedPreview").innerText = typedText;
-    }
+    let accuracy = (correct/attempted)*100 || 0;
+
+    document.getElementById("result").innerHTML = `
+    Attempted: ${attempted} <br>
+    Gross Speed: ${gross.toFixed(2)} WPM <br>
+    Net Speed: ${net.toFixed(2)} WPM <br>
+    Accuracy: ${accuracy.toFixed(2)}% <br>
+    Mistakes: ${mistakes} <br>
+    Result: ${net >= 35 ? "Qualified" : "Not Qualified"}
+    `;
+}
 
 </script>
 
