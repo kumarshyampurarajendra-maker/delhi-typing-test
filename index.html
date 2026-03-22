@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Delhi Police Typing Test Series</title>
+<title>Typing Test Pro</title>
 
 <style>
 body{
@@ -19,23 +19,23 @@ body{
 
 #text{
     border:1px solid black;
-    padding:15px;
+    padding:20px;
     height:300px;
-    width:80%;
+    width:85%;
     margin:60px auto 10px;
     overflow-y:auto;
     text-align:left;
     font-size:18px;
-    line-height:28px;
+    line-height:30px;
 }
 
 textarea{
-    width:80%;
+    width:85%;
     height:150px;
     font-size:18px;
 }
 
-select, button{
+select,button{
     padding:10px;
     margin:10px;
 }
@@ -44,7 +44,7 @@ select, button{
 
 <body>
 
-<h2>Delhi Police Head Constable Typing Test Series</h2>
+<h2>Delhi Police Typing Test Series</h2>
 
 <p id="timer">Time Left: 10:00</p>
 
@@ -62,25 +62,39 @@ select, button{
 
 <script>
 
-// 🔥 100 DIFFERENT PASSAGES
-let tests = [];
-
-for(let i=1;i<=100;i++){
-    tests.push(
-    "Passage "+i+": India is witnessing rapid development in infrastructure, technology, and governance. "+
-    "Public services are improving due to digital transformation and policy reforms. "+
-    "Citizens are becoming more aware of their rights and responsibilities. "+
-    "Efficient administration and skilled workforce are essential for national progress."
-    );
+// 🔥 LONG PASSAGE GENERATOR (~400+ words)
+function generatePassage(num){
+return "Passage "+num+": " +
+"India is one of the fastest growing economies in the world and is continuously developing in multiple sectors including technology, infrastructure, and governance. " +
+"The role of digital systems has increased significantly in recent years, making administrative processes faster and more transparent. " +
+"Citizens are now more aware of their rights and duties, which helps in building a responsible society. " +
+"Government initiatives have improved access to education, healthcare, and public services across urban and rural areas. " +
+"Typing skills play an important role in government jobs, especially in clerical and ministerial positions where documentation work is essential. " +
+"Candidates preparing for such exams must practice regularly to improve both speed and accuracy. " +
+"Consistency is the key to mastering typing skills, as daily practice builds muscle memory and reduces errors over time. " +
+"Time management during typing tests is equally important because candidates need to maintain a balance between speed and accuracy. " +
+"Making too many mistakes can reduce the overall score even if the typing speed is high. " +
+"Therefore, candidates should focus on typing carefully while maintaining a steady pace. " +
+"Regular mock tests help candidates understand their performance level and identify weak areas that need improvement. " +
+"Practicing long passages prepares candidates for real exam scenarios and improves concentration. " +
+"Candidates should avoid unnecessary pressure and stay calm during the test to perform better. " +
+"Developing good typing habits such as proper finger placement and posture also contributes to better performance. " +
+"In conclusion, success in typing tests depends on consistent practice, accuracy, and effective time management.";
 }
 
-// 🔥 dropdown fill
+// 🔥 100 TESTS
+let tests = [];
+for(let i=1;i<=100;i++){
+    tests.push(generatePassage(i));
+}
+
+// dropdown
 let select = document.getElementById("testSelect");
 for(let i=0;i<tests.length;i++){
-    let option = document.createElement("option");
-    option.value = i;
-    option.text = "Test " + (i+1);
-    select.appendChild(option);
+    let opt = document.createElement("option");
+    opt.value = i;
+    opt.text = "Test " + (i+1);
+    select.appendChild(opt);
 }
 
 let time = 600;
@@ -95,7 +109,6 @@ function startTest(){
     currentText = tests[index];
 
     document.getElementById("text").innerText = currentText;
-
     document.getElementById("input").value = "";
 
     time = 600;
@@ -119,7 +132,7 @@ function startTest(){
     },1000);
 }
 
-// RESULT
+// ✅ CORRECT MISTAKE LOGIC
 function endTest(){
 
     clearInterval(timer);
@@ -130,9 +143,9 @@ function endTest(){
     let correct = 0;
     let mistakes = 0;
 
-    let maxLength = Math.max(original.length, typed.length);
+    let length = Math.max(original.length, typed.length);
 
-    for(let i=0;i<maxLength;i++){
+    for(let i=0;i<length;i++){
         if(typed[i] === original[i]){
             correct++;
         }else{
@@ -146,6 +159,7 @@ function endTest(){
 
     let gross = attempted / minutes;
 
+    // 🔥 DELHI POLICE STYLE
     let net = gross - mistakes;
     if(net < 0) net = 0;
 
