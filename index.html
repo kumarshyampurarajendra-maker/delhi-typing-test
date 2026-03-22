@@ -1,8 +1,4 @@
-let selectedTest = document.getElementById("testSelect").value;
-
-let longText = tests[selectedTest] + " " + tests[selectedTest] + " " + tests[selectedTest];
-
-document.getElementById("text").innerText = longText;<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Delhi Police Head Constable Typing Test</title>
@@ -187,8 +183,17 @@ function playSound(){
 
 function startTest(){
     
-    let randomTest = tests[Math.floor(Math.random() * tests.length)];
-document.getElementById("text").innerText = randomTest;
+    let selectedTest = document.getElementById("testSelect").value;
+
+let baseText = tests[selectedTest];
+
+let longText = "";
+
+for(let i=0; i<20; i++){
+    longText += baseText + " ";
+}
+
+document.getElementById("text").innerText = longText;
     if(!started){
         started = true;
         timerInterval = setInterval(function(){
