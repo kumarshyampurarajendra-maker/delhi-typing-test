@@ -44,7 +44,7 @@ select,button{
 
 <body>
 
-<h2>Delhi Police Head Constable Typing Test</h2>
+<h2>Delhi Police Typing Test</h2>
 
 <p id="timer">Time Left: 10:00</p>
 
@@ -62,39 +62,39 @@ select,button{
 
 <script>
 
-// 🔥 10 DIFFERENT LONG PASSAGES (sample, tu 100 tak extend kar sakta)
+// 🔥 REAL DIFFERENT PASSAGES
 let tests = [
 
-`Environment plays a vital role in maintaining balance... (400+ words environment passage)`,
+`Environment protection is one of the most important responsibilities... (यहाँ पूरा 400+ words environment passage डालो)`,
 
-`Pollution is one of the biggest challenges... (400+ words pollution passage)`,
+`Air pollution is increasing rapidly due to industrial growth... (400+ words pollution passage)`,
 
-`Technology is rapidly transforming modern society...`,
+`Technology has transformed communication and governance...`,
 
-`The Indian economy is growing at a fast pace...`,
+`The Indian economy is growing but faces many challenges...`,
 
-`Education is the foundation of a strong nation...`,
+`Education plays a key role in shaping the future...`,
 
-`Police administration ensures law and order...`,
+`Police administration ensures safety and law enforcement...`,
 
-`Health and hygiene are essential for human life...`,
+`Health awareness has increased after global pandemics...`,
 
-`Digital India has changed the way people interact...`,
+`Digital services have made life easier for citizens...`,
 
-`Transport and infrastructure development boosts economy...`,
+`Transport systems are expanding rapidly in cities...`,
 
-`Discipline and consistency are keys to success...`
+`Discipline and hard work lead to success...`
 
 ];
 
 // dropdown
 let select = document.getElementById("testSelect");
-for(let i=0;i<tests.length;i++){
+tests.forEach((_,i)=>{
     let opt = document.createElement("option");
     opt.value = i;
     opt.text = "Test " + (i+1);
     select.appendChild(opt);
-}
+});
 
 let time = 600;
 let timer;
@@ -131,7 +131,7 @@ function startTest(){
     },1000);
 }
 
-// ✅ CORRECT MISTAKE CALCULATION
+// ✅ CORRECT MISTAKE (Delhi Police style)
 function endTest(){
 
     clearInterval(timer);
