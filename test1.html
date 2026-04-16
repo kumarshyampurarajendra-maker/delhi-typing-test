@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test 1</title>
+</head>
+<body>
+
+<h2>Typing Test 1 (10 Min)</h2>
+
+<p id="text">
+Environment protection has become one of the most important concerns in today’s world. With rapid industrialization and urbanization, the level of pollution has increased significantly. Air pollution, water pollution, and noise pollution are affecting the health of millions of people across the globe. Governments are taking steps to reduce pollution by introducing strict laws and promoting awareness among citizens. However, individual responsibility is equally important in protecting the environment.
+
+People can contribute to environmental protection in many simple ways. Saving water, reducing the use of plastic, planting trees, and using public transport are some effective measures. Small actions taken by individuals can create a big impact when practiced collectively. It is important to understand that natural resources are limited and must be used wisely.
+
+Education plays a crucial role in spreading awareness about environmental issues. Schools and colleges should encourage students to participate in activities such as tree plantation drives and cleanliness campaigns. This helps in developing a sense of responsibility among young individuals. Media and social platforms can also be used to spread information and motivate people to adopt eco-friendly habits.
+
+Another major concern is climate change, which is caused by the excessive emission of greenhouse gases. This has led to global warming, rising sea levels, and unpredictable weather patterns. If immediate action is not taken, the consequences can be severe for future generations. Governments and organizations must work together to find sustainable solutions.
+
+In addition to government efforts, individuals must also take responsibility for their actions. Using renewable energy sources such as solar and wind power can reduce dependence on fossil fuels. Recycling and reusing materials can also help in reducing waste. People should be encouraged to adopt a sustainable lifestyle.
+
+Protecting the environment is not just a responsibility but a necessity. Every individual has a role to play in preserving nature for future generations. By taking small steps today, we can ensure a better and healthier tomorrow for everyone.
+</p>
+
+<textarea id="input" rows="10" cols="60"></textarea>
+
+<br><br>
+<button onclick="startTest()">Start</button>
+<button onclick="endTest()">Submit</button>
+
+<p id="result"></p>
+
+<script>
+let startTime;
+
+function startTest() {
+    startTime = new Date();
+}
+
+function endTest() {
+    let endTime = new Date();
+    let timeTaken = (endTime - startTime) / 1000 / 60;
+
+    let typedText = document.getElementById("input").value;
+    let wordCount = typedText.trim().split(/\s+/).length;
+
+    let wpm = Math.round(wordCount / timeTaken);
+
+    document.getElementById("result").innerHTML =
+        "Time: " + timeTaken.toFixed(2) + " min <br> WPM: " + wpm;
+}
+</script>
+
+</body>
+  </html>
