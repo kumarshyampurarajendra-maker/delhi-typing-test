@@ -1,60 +1,18 @@
-!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Typing Test</title>
+</head>
+<body>
 
-Governments are taking steps to reduce pollution and promote sustainable development.
-Laws have been introduced to control emissions and protect forests.
-However, individuals also play a major role.
-Saving water, reducing plastic, and planting trees can help significantly.
+<h1>Typing Test Series</h1>
 
-Education spreads awareness about environment protection.
-Schools should encourage students to participate in activities like tree plantation.
-Renewable energy like solar and wind power is also important for a cleaner future.
-
-
-    },1000);
-}
-
-// RESULT
-function endTest(){
-
-    clearInterval(timer);
-
-    let original = currentText.trim().split(/\s+/);
-    let typed = document.getElementById("input").value.trim().split(/\s+/);
-
-    let correct = 0;
-    let mistakes = 0;
-
-    for(let i=0;i<typed.length;i++){
-        if(typed[i] === original[i]){
-            correct++;
-        }else{
-            mistakes++;
-        }
-    }
-
-    let attempted = typed.length;
-
-    let minutes = (600-time)/60;
-
-    let gross = attempted / minutes;
-
-    let net = gross - mistakes;
-    if(net < 0) net = 0;
-
-    let accuracy = (correct/attempted)*100 || 0;
-
-    document.getElementById("result").innerHTML = `
-    Attempted Words: ${attempted} <br>
-    Gross Speed: ${gross.toFixed(2)} WPM <br>
-    Net Speed: ${net.toFixed(2)} WPM <br>
-    Accuracy: ${accuracy.toFixed(2)}% <br>
-    Mistakes: ${mistakes} <br>
-    Result: ${net >= 30 ? "Qualified" : "Not Qualified"}
-    `;
-}
-
-</script>
+<ul>
+<li><a href="test1.html">Test 1</a></li>
+<li><a href="test2.html">Test 2</a></li>
+<li><a href="test3.html">Test 3</a></li>
+</ul>
 
 </body>
-    </html>
+</html>
         
