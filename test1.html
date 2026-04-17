@@ -6,31 +6,39 @@
 <style>
 body {
     font-family: Arial;
-    padding: 15px;
-}
-
-/* TIMER */
-#timer {
-    font-size: 22px;
-    font-weight: bold;
-    float: right;
-}
-
-/* PASSAGE BOX */
-#text-box {
-    border: 2px solid #333;
-    height: 200px;
-    overflow-y: scroll;
     padding: 10px;
-    font-size: 18px;
-    line-height: 1.6;
 }
 
-/* INPUT BOX */
+/* HEADER */
+#top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* PASSAGE BOX (VERTICAL SCROLL) */
+#text-box {
+    border: 2px solid black;
+    height: 250px;
+    width: 100%;
+    overflow-y: scroll;
+    padding: 12px;
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+/* INPUT */
 textarea {
     width: 100%;
     height: 120px;
     margin-top: 10px;
+    font-size: 18px;
+}
+
+/* BUTTON */
+button {
+    padding: 8px 15px;
     font-size: 16px;
 }
 </style>
@@ -38,7 +46,12 @@ textarea {
 </head>
 <body>
 
-<h2>Typing Test <span id="timer">10:00</span></h2>
+<div id="top">
+<span>Typing Test</span>
+<span id="timer">10:00</span>
+</div>
+
+<br>
 
 <div id="text-box">
 <p id="text">
@@ -46,7 +59,9 @@ Environment protection has become one of the most important concerns in today’
 
 People can contribute to environmental protection in many simple ways. Saving water, reducing the use of plastic, planting trees, and using public transport are some effective measures. Small actions taken by individuals can create a big impact when practiced collectively. It is important to understand that natural resources are limited and must be used wisely.
 
-Education plays a crucial role in spreading awareness about environmental issues. Schools and colleges should encourage students to participate in activities such as tree plantation drives and cleanliness campaigns. This helps in developing a sense of responsibility among young individuals.
+Education plays a crucial role in spreading awareness about environmental issues. Schools and colleges should encourage students to participate in activities such as tree plantation drives and cleanliness campaigns. This helps in developing a sense of responsibility among young individuals. Media and social platforms can also be used to spread information and motivate people to adopt eco-friendly habits.
+
+Another major concern is climate change, which is caused by the excessive emission of greenhouse gases. This has led to global warming, rising sea levels, and unpredictable weather patterns. If immediate action is not taken, the consequences can be severe for future generations.
 </p>
 </div>
 
@@ -59,22 +74,22 @@ Education plays a crucial role in spreading awareness about environmental issues
 <p id="result"></p>
 
 <script>
-let time = 600; // 10 min
+let time = 600;
 let timerInterval;
 let startTime;
 
-// TIMER FUNCTION
+// TIMER
 function startTest() {
     startTime = new Date();
 
     timerInterval = setInterval(function() {
         time--;
 
-        let minutes = Math.floor(time / 60);
-        let seconds = time % 60;
+        let min = Math.floor(time / 60);
+        let sec = time % 60;
 
         document.getElementById("timer").innerHTML =
-            minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            min + ":" + (sec < 10 ? "0" : "") + sec;
 
         if (time <= 0) {
             clearInterval(timerInterval);
@@ -83,22 +98,39 @@ function startTest() {
     }, 1000);
 }
 
-// RESULT
+// RESULT + MISTAKE
 function endTest() {
     clearInterval(timerInterval);
 
-    let endTime = new Date();
-    let timeTaken = (endTime - startTime) / 1000 / 60;
+    let original = document.getElementById("text").innerText.trim();
+    let typed = document.getElementById("input").value.trim();
 
-    let typedText = document.getElementById("input").value;
-    let wordCount = typedText.trim().split(/\s+/).length;
+    let originalWords = original.split(/\s+/);
+    let typedWords = typed.split(/\s+/);
 
-    let wpm = Math.round(wordCount / timeTaken);
+    let correct = 0;
+    let mistakes = 0;
+
+    for (let i = 0; i < originalWords.length; i++) {
+        if (typedWords[i] === originalWords[i]) {
+            correct++;
+        } else {
+            mistakes++;
+        }
+    }
+
+    let timeTaken = (600 - time) / 60;
+    let grossWPM = typedWords.length / timeTaken;
+
+    // Delhi Police rule: 1 mistake = -1 WPM
+    let netWPM = Math.max(0, Math.round(grossWPM - mistakes));
 
     document.getElementById("result").innerHTML =
-        "Time: " + timeTaken.toFixed(2) + " min | WPM: " + wpm;
+        "Gross WPM: " + Math.round(grossWPM) +
+        " | Mistakes: " + mistakes +
+        " | Net WPM: " + netWPM;
 }
 </script>
 
 </body>
-</html>
+</html>        
