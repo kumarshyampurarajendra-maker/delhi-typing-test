@@ -9,7 +9,7 @@ body {
     padding: 10px;
 }
 
-/* HEADER */
+/* TOP BAR */
 #top {
     display: flex;
     justify-content: space-between;
@@ -17,20 +17,20 @@ body {
     font-weight: bold;
 }
 
-/* PASSAGE BOX (VERTICAL SCROLL) */
+/* PASSAGE BOX (VERTICAL LONG, WIDTH SMALL) */
 #text-box {
     border: 2px solid black;
-    height: 250px;
-    width: 100%;
-    overflow-y: scroll;
-    padding: 12px;
+    height: 350px;       /* ज्यादा ऊँचाई */
+    width: 300px;        /* कम चौड़ाई */
+    overflow-y: scroll;  /* scroll manual */
+    padding: 10px;
     font-size: 20px;
     line-height: 1.8;
 }
 
 /* INPUT */
 textarea {
-    width: 100%;
+    width: 300px;        /* same width */
     height: 120px;
     margin-top: 10px;
     font-size: 18px;
@@ -59,9 +59,7 @@ Environment protection has become one of the most important concerns in today’
 
 People can contribute to environmental protection in many simple ways. Saving water, reducing the use of plastic, planting trees, and using public transport are some effective measures. Small actions taken by individuals can create a big impact when practiced collectively. It is important to understand that natural resources are limited and must be used wisely.
 
-Education plays a crucial role in spreading awareness about environmental issues. Schools and colleges should encourage students to participate in activities such as tree plantation drives and cleanliness campaigns. This helps in developing a sense of responsibility among young individuals. Media and social platforms can also be used to spread information and motivate people to adopt eco-friendly habits.
-
-Another major concern is climate change, which is caused by the excessive emission of greenhouse gases. This has led to global warming, rising sea levels, and unpredictable weather patterns. If immediate action is not taken, the consequences can be severe for future generations.
+Education plays a crucial role in spreading awareness about environmental issues. Schools and colleges should encourage students to participate in activities such as tree plantation drives and cleanliness campaigns. This helps in developing a sense of responsibility among young individuals.
 </p>
 </div>
 
@@ -78,8 +76,16 @@ let time = 600;
 let timerInterval;
 let startTime;
 
-// TIMER
+// START FUNCTION (RESET भी करेगा)
 function startTest() {
+    clearInterval(timerInterval);
+
+    // RESET
+    time = 600;
+    document.getElementById("timer").innerHTML = "10:00";
+    document.getElementById("input").value = ""; // पुराना text हटेगा
+    document.getElementById("result").innerHTML = "";
+
     startTime = new Date();
 
     timerInterval = setInterval(function() {
@@ -98,7 +104,7 @@ function startTest() {
     }, 1000);
 }
 
-// RESULT + MISTAKE
+// RESULT
 function endTest() {
     clearInterval(timerInterval);
 
@@ -111,7 +117,7 @@ function endTest() {
     let correct = 0;
     let mistakes = 0;
 
-    for (let i = 0; i < originalWords.length; i++) {
+    for (let i = 0; i < typedWords.length; i++) {
         if (typedWords[i] === originalWords[i]) {
             correct++;
         } else {
@@ -121,16 +127,16 @@ function endTest() {
 
     let timeTaken = (600 - time) / 60;
     let grossWPM = typedWords.length / timeTaken;
-
-    // Delhi Police rule: 1 mistake = -1 WPM
     let netWPM = Math.max(0, Math.round(grossWPM - mistakes));
 
     document.getElementById("result").innerHTML =
-        "Gross WPM: " + Math.round(grossWPM) +
-        " | Mistakes: " + mistakes +
-        " | Net WPM: " + netWPM;
+        "Time: " + timeTaken.toFixed(2) + " min<br>" +
+        "Total Words: " + typedWords.length + "<br>" +
+        "Mistakes: " + mistakes + "<br>" +
+        "Gross WPM: " + Math.round(grossWPM) + "<br>" +
+        "Net WPM: " + netWPM;
 }
 </script>
 
 </body>
-</html>        
+</html>
