@@ -10,14 +10,12 @@ body {
     text-align: center;
 }
 
-/* TIMER (BOX के ऊपर CENTER) */
 #timer {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-/* PASSAGE BOX */
 #text-box {
     border: 2px solid black;
     height: 350px;
@@ -29,7 +27,6 @@ body {
     margin: auto;
 }
 
-/* INPUT */
 textarea {
     width: 300px;
     height: 120px;
@@ -37,7 +34,6 @@ textarea {
     font-size: 18px;
 }
 
-/* BUTTON */
 button {
     padding: 8px 15px;
     font-size: 16px;
@@ -53,23 +49,17 @@ button {
 
 <div id="text-box">
 <p id="text">
-Environment protection has become one of the most important concerns in today’s world. With rapid industrialization and urbanization, the level of pollution has increased significantly. Air pollution, water pollution, and noise pollution are affecting the health of millions of people across the globe. Governments are taking steps to reduce pollution by introducing strict laws and promoting awareness among citizens. However, individual responsibility is equally important in protecting the environment.
+Environment protection has become one of the most important concerns in today's world. With rapid industrialization and urbanization, the level of pollution has increased significantly. Air pollution, water pollution, and noise pollution are affecting the health of millions of people across the globe. Governments are taking steps to reduce pollution by introducing strict laws and promoting awareness among citizens. However, individual responsibility is equally important in protecting the environment.
 
-People can contribute to environmental protection in many simple ways. Saving water, reducing the use of plastic, planting trees, and using public transport are some effective measures. Small actions taken by individuals can create a big impact when practiced collectively. It is important to understand that natural resources are limited and must be used wisely. Overuse of resources can lead to long term environmental damage which may not be reversible.
+People can contribute to environmental protection in many simple ways. Saving water, reducing the use of plastic, planting trees, and using public transport are some effective measures. Small actions taken by individuals can create a big impact when practiced collectively. It is important to understand that natural resources are limited and must be used wisely.
 
 Education plays a crucial role in spreading awareness about environmental issues. Schools and colleges should encourage students to participate in activities such as tree plantation drives and cleanliness campaigns. This helps in developing a sense of responsibility among young individuals. Media and social platforms can also be used to spread information and motivate people to adopt eco friendly habits.
 
-Another major concern is climate change, which is caused by the excessive emission of greenhouse gases. This has led to global warming, rising sea levels, and unpredictable weather patterns. If immediate action is not taken, the consequences can be severe for future generations. Governments and organizations must work together to find sustainable solutions and reduce carbon emissions.
+Another major concern is climate change, which is caused by the excessive emission of greenhouse gases. This has led to global warming, rising sea levels, and unpredictable weather patterns. If immediate action is not taken, the consequences can be severe for future generations. Governments and organizations must work together to find sustainable solutions.
 
-In addition to government efforts, individuals must also take responsibility for their actions. Using renewable energy sources such as solar and wind power can reduce dependence on fossil fuels. Recycling and reusing materials can also help in reducing waste. People should be encouraged to adopt a sustainable lifestyle and support eco friendly initiatives.
+In addition to government efforts, individuals must also take responsibility for their actions. Using renewable energy sources such as solar and wind power can reduce dependence on fossil fuels. Recycling and reusing materials can also help in reducing waste. People should be encouraged to adopt a sustainable lifestyle.
 
-Protecting the environment is not just a responsibility but a necessity. Every individual has a role to play in preserving nature for future generations. By taking small steps today, we can ensure a better and healthier tomorrow for everyone. Awareness, discipline, and consistent efforts are the key factors that can bring a positive change in environmental protection.
-
-If people continue to ignore environmental issues, the future may become very dangerous. Natural disasters such as floods, droughts, and heatwaves are increasing every year. These problems are directly linked to environmental imbalance. Therefore, it is very important that people take environmental protection seriously and make it a part of their daily life.
-
-Governments alone cannot solve this problem. Every citizen must contribute to protecting nature. Simple habits such as saving electricity, reducing waste, and avoiding pollution can make a huge difference. If everyone works together, we can create a clean, safe, and healthy environment for future generations.The environment is the fundamental framework of our existence. It encompasses everything around us—the air we breathe, the water we drink, the soil that grows our food, and the intricate web of life that sustains the planet. Historically, humanity viewed the natural world as an infinite resource to be conquered and consumed, but modern reality has proven otherwise. Today, protecting the environment is no longer just a moral ideal; it is an urgent and vital necessity for human survival.
-The Foundation of Life
-Every aspect of human society is deeply reliant on ecological stability. We depend on forests to act as the Earth's lungs, filtering carbon dioxide and producing the oxygen we breathe. We rely on healthy oceans to regulate global temperatures, generate weather patterns, and provide a primary food source for billions of people. Furthermore, biodiversity—the vast variety of plant and animal life—ensures the resilience of these ecosystems. When ecosystems are balanced and thriving, they provide "services" like water purification, pollination of crops, and disease control. Humanity thrives only when this natural infrastructure remains intact.
+Protecting the environment is not just a responsibility but a necessity. Every individual has a role to play in preserving nature for future generations. By taking small steps today, we can ensure a better and healthier tomorrow for everyone.
 </p>
 </div>
 
@@ -84,8 +74,8 @@ Every aspect of human society is deeply reliant on ecological stability. We depe
 <script>
 let time = 600;
 let timerInterval;
-let startTime;
 
+// START
 function startTest() {
     clearInterval(timerInterval);
 
@@ -93,8 +83,6 @@ function startTest() {
     document.getElementById("timer").innerHTML = "10:00";
     document.getElementById("input").value = "";
     document.getElementById("result").innerHTML = "";
-
-    startTime = new Date();
 
     timerInterval = setInterval(function() {
         time--;
@@ -112,35 +100,50 @@ function startTest() {
     }, 1000);
 }
 
+// SOUND
+document.getElementById("input").addEventListener("keydown", function() {
+    let audio = new Audio("https://www.soundjay.com/keyboard/sounds/keyboard-1.mp3");
+    audio.volume = 0.2;
+    audio.play();
+});
+
+// RESULT
 function endTest() {
     clearInterval(timerInterval);
 
-    let original = document.getElementById("text").innerText.trim();
-    let typed = document.getElementById("input").value.trim();
+    let original = document.getElementById("text").innerText.toLowerCase().replace(/[^\w\s]/g, "");
+    let typed = document.getElementById("input").value.toLowerCase().replace(/[^\w\s]/g, "");
 
     let originalWords = original.split(/\s+/);
     let typedWords = typed.split(/\s+/);
 
-    let mistakes = 0;
+    let correct = 0;
 
     for (let i = 0; i < typedWords.length; i++) {
-        if (typedWords[i] !== originalWords[i]) {
-            mistakes++;
+        if (typedWords[i] === originalWords[i]) {
+            correct++;
         }
     }
 
+    let total = typedWords.length;
+    let mistakes = total - correct;
+
     let timeTaken = (600 - time) / 60;
-    let grossWPM = typedWords.length / timeTaken;
+    let grossWPM = total / timeTaken;
     let netWPM = Math.max(0, Math.round(grossWPM - mistakes));
+
+    let accuracy = (correct / total) * 100;
 
     document.getElementById("result").innerHTML =
         "Time: " + timeTaken.toFixed(2) + " min<br>" +
-        "Total Words: " + typedWords.length + "<br>" +
+        "Total Words: " + total + "<br>" +
+        "Correct Words: " + correct + "<br>" +
         "Mistakes: " + mistakes + "<br>" +
+        "Accuracy: " + accuracy.toFixed(2) + "%<br>" +
         "Gross WPM: " + Math.round(grossWPM) + "<br>" +
         "Net WPM: " + netWPM;
 }
 </script>
 
 </body>
-    </html>
+</html>
