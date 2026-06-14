@@ -68,8 +68,20 @@ correct++;
 
 }
 
-let totalWords = typedWords.length;
-let mistakes = totalWords - correct;
+let totalWords = typedWords.length
+  let mistakes = 0;
+
+for(let i = 0; i < typedWords.length; i++){
+
+if(
+typedWords[i] &&
+originalWords[i] &&
+typedWords[i] !== originalWords[i]
+){
+mistakes++;
+}
+
+}
 
 let timeTaken = (600 - time) / 60;
 
