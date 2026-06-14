@@ -90,7 +90,7 @@ timeTaken = 1;
 }
 
 let grossWPM =
-Math.round(totalWords / timeTaken);
+Math.round(totalWords / 10);
 
 let netWPM =
 Math.max(0, grossWPM - mistakes);
