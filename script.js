@@ -104,7 +104,26 @@ let status =
 netWPM >= 30
 ? "QUALIFIED"
 : "NOT QUALIFIED";
+let errorReview = "<br><br><b>Wrong Words Review</b><br>";
 
+for(let i = 0; i < typedWords.length; i++){
+
+if(
+typedWords[i] &&
+originalWords[i] &&
+typedWords[i] !== originalWords[i]
+){
+
+errorReview +=
+"<span style='color:red'>" +
+typedWords[i] +
+"</span> → " +
+originalWords[i] +
+"<br>";
+
+}
+
+}
 resultElement.innerHTML =
 
 "Total Words: " + totalWords +
@@ -113,6 +132,6 @@ resultElement.innerHTML =
 "<br>Accuracy: " + accuracy + "%" +
 "<br>Gross WPM: " + grossWPM +
 "<br>Net WPM: " + netWPM +
-"<br>Status: " + status;
-
+"<br>Status: " + status +
+errorReview;
   }
