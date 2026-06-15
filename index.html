@@ -1,24 +1,23 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Delhi Police Head Constable Typing Test Practice</title><link rel="stylesheet" href="style.css">
-</head><body><div class="container"><h1>Delhi Police Head Constable Typing Test Practice</h1><div class="top-bar">
-<div id="timer">10:00</div>
-</div><div class="paragraph-section">
-<div id="paragraph-box">
-<p id="paragraph">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Delhi Police Head Constable Typing Test</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="container"><h1>Delhi Police Head Constable Typing Test</h1><div class="language-box">
+<label>Select Language:</label><select id="language">
+<option value="english">English (30 WPM)</option>
+<option value="hindi">Hindi (25 WPM)</option>
+</select>
+</div><div class="top-bar"><div id="timer">
+10:00
+</div></div><div id="paragraph-box"><p id="paragraph">
 Loading Paragraph...
-</p>
-</div>
-</div><div class="typing-section">
-<textarea
+</p></div><textarea
 id="typingArea"
 placeholder="Start typing here..."
 disabled>
-</textarea>
-</div><div class="button-section">
-<button id="startBtn">Start Test</button>
-<button id="submitBtn">Submit Test</button>
-</div><div id="result"></div></div><script src="paragraphs.js"></script><script src="script.js"></script></body>
-        </html>
+</textarea><div class="buttons"><button id="startBtn">
+Start Test
+</button><button id="submitBtn">
+Submit Test
+</button></div><div id="result"></div><div id="errorReview"></div></div><script src="paragraphs.js"></script><script src="script.js"></script></body>
+</html>
