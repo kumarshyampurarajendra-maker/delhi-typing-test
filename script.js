@@ -1,5 +1,5 @@
 let time = 600;
-let timer;
+let timer = null;
 let testStarted = false;
 
 const paragraphElement = document.getElementById("paragraph");
@@ -8,23 +8,22 @@ const timerElement = document.getElementById("timer");
 const resultElement = document.getElementById("result");
 const languageSelect = document.getElementById("language");
 
+function loadParagraph() {
+
+if(languageSelect.value === "hindi"){
+paragraphElement.innerText = hindiParagraphs[0];
+}else{
+paragraphElement.innerText = englishParagraphs[0];
+}
+
+}
+
 loadParagraph();
 
 languageSelect.addEventListener("change", loadParagraph);
 
 document.getElementById("startBtn").addEventListener("click", startTest);
 document.getElementById("submitBtn").addEventListener("click", submitTest);
-
-function loadParagraph(){
-
-if(languageSelect.value === "hindi"){
-paragraphElement.innerText = hindiParagraphs[0];
-}
-else{
-paragraphElement.innerText = englishParagraphs[0];
-}
-
-}
 
 function startTest(){
 
@@ -59,24 +58,20 @@ clearInterval(timer);
 
 typingArea.disabled = true;
 
-const original =
-paragraphElement.innerText.toLowerCase();
+const originalWords =
+paragraphElement.innerText.trim().split(/\s+/);
 
-const typed =
-typingArea.value.toLowerCase();
-
-const originalWords = original.split(/\s+/);
-const typedWords = typed.split(/\s+/);
+const typedWords =
+typingArea.value.trim().split(/\s+/);
 
 let correct = 0;
 let mistakes = 0;
 
-for(let i=0;i<typedWords.length;i++){
+for(let i = 0; i < typedWords.length; i++){
 
 if(typedWords[i] === originalWords[i]){
 correct++;
-}
-else{
+}else{
 mistakes++;
 }
 
@@ -86,10 +81,9 @@ let totalWords = typedWords.length;
 
 let grossWPM = Math.round(totalWords / 10);
 
-let netWPM = Math.max(0,grossWPM - mistakes);
+let netWPM = Math.max(0, grossWPM - mistakes);
 
-let accuracy =
-totalWords > 0
+let accuracy = totalWords > 0
 ? ((correct / totalWords) * 100).toFixed(2)
 : 0;
 
@@ -112,4 +106,4 @@ resultElement.innerHTML =
 "<br>Net WPM: " + netWPM +
 "<br>Status: " + status;
 
-}
+  }
